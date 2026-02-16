@@ -1,0 +1,9 @@
+- [ ] GPX files: combine all downloaded files into one big file
+- [ ] Caching: cache downloaded caches
+    - [ ] Force refresh
+    - [ ] Expiration time
+- [ ] Rethink --force behavior and naming (switch to -y/--yes for always answering yes)
+- [ ] Error handling: The code uses a basic MVP approach where execution stops on first error rather than attempting recovery, which could lead to incomplete operations.
+- [ ] Automated End to end tests
+- [ ] Implement retry logic for transient failures
+- [ ] `--config <path>`: Override default session storage path

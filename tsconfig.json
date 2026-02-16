@@ -1,0 +1,29 @@
+{
+	"extends": "@tsconfig/node20/tsconfig.json",
+	"compilerOptions": {
+		/* Output and Source structure */
+		"outDir": "dist",
+		"rootDir": "src",
+
+		/* Module System (ESM) */
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"target": "ES2022",
+
+		/* Strictness & Quality */
+		"strict": true,
+		"noImplicitAny": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+
+		/* Support for JSON & Metadata */
+		"resolveJsonModule": true,
+		"sourceMap": true,
+
+		/* Library support */
+		"lib": ["ESNext", "DOM"]
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "dist", "**/*.test.ts"]
+}

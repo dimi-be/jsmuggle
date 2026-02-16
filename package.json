@@ -1,0 +1,51 @@
+{
+	"name": "jsmuggle",
+	"author": "Dimitri Michaux",
+	"version": "1.0.0",
+	"license": "GPL-3.0-or-later",
+	"description": "Generate GPX files from geocaching.com from the command line",
+	"main": "dist/index.cjs",
+	"type": "module",
+	"bin": {
+		"jsmuggle": "dist/index.cjs"
+	},
+	"scripts": {
+		"build": "node scripts/build.js",
+		"typecheck": "tsc --noEmit",
+		"dev": "tsx src/index.ts",
+		"start": "node dist/index.cjs",
+		"test": "vitest",
+		"test:ui": "vitest --ui",
+		"test:coverage": "vitest run --coverage",
+		"test:run": "vitest run"
+	},
+	"keywords": [
+		"geocaching",
+		"gpx",
+		"cli"
+	],
+	"dependencies": {
+		"@clack/prompts": "^0.10.0",
+		"axios": "^1.7.9",
+		"axios-cookiejar-support": "^5.0.5",
+		"commander": "^13.1.0",
+		"geo-coordinates-parser": "^1.7.4",
+		"tough-cookie": "^5.1.0"
+	},
+	"devDependencies": {
+		"@tsconfig/node20": "^20.1.9",
+		"@types/jsdom": "^21.1.7",
+		"@types/node": "^22.13.1",
+		"@vitest/coverage-v8": "^4.0.18",
+		"@vitest/ui": "^4.0.18",
+		"esbuild": "^0.27.3",
+		"jsdom": "^28.0.0",
+		"prettier": "^3.8.1",
+		"tsx": "^4.19.2",
+		"typescript": "^5.7.3",
+		"vitest": "^4.0.18"
+	},
+	"engines": {
+		"node": ">=20.0.0"
+	}
+}
