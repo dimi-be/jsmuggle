@@ -295,7 +295,7 @@ npx prettier --write .
 The project uses **esbuild** to bundle all dependencies into a single executable file:
 
 - **Input**: `src/index.ts`
-- **Output**: `dist/index.cjs` (496KB minified)
+- **Output**: `dist/jsmuggle.cjs` (496KB minified)
 - **Format**: CommonJS (for Node.js compatibility)
 - **External**: `jsdom` (has runtime file dependencies that cannot be bundled)
 

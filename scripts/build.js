@@ -12,7 +12,7 @@ console.log(`Building jsmuggle v${version}...`);
 try {
 	await build({
 		entryPoints: ['src/index.ts'],
-		outfile: 'dist/index.cjs',
+		outfile: 'dist/jsmuggle.cjs',
 		bundle: true,
 		platform: 'node',
 		target: 'node20',
@@ -31,7 +31,7 @@ try {
 	});
 
 	// Add shebang to the output file
-	const outputPath = 'dist/index.cjs';
+	const outputPath = 'dist/jsmuggle.cjs';
 	const content = readFileSync(outputPath, 'utf8');
 	if (!content.startsWith('#!/usr/bin/env node')) {
 		writeFileSync(outputPath, `#!/usr/bin/env node\n${content}`);
@@ -41,8 +41,8 @@ try {
 	chmodSync(outputPath, 0o755);
 
 	console.log('✓ Build completed successfully');
-	console.log('  Output: dist/index.cjs');
-	console.log('  Sourcemap: dist/index.cjs.map');
+	console.log('  Output: dist/jsmuggle.cjs');
+	console.log('  Sourcemap: dist/jsmuggle.cjs.map');
 } catch (error) {
 	console.error('✗ Build failed:', error);
 	process.exit(1);

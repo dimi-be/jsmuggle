@@ -14,7 +14,7 @@ npm install
 npm run build
 
 # Run
-node dist/index.cjs --help
+node dist/jsmuggle.cjs --help
 ```
 
 ## Project Structure
@@ -60,8 +60,8 @@ scripts/
 └── build.js              # esbuild bundling script
 
 dist/
-├── index.cjs             # Bundled executable (main output)
-└── index.cjs.map         # Source map for debugging
+├── jsmuggle.cjs             # Bundled executable (main output)
+└── jsmuggle.cjs.map         # Source map for debugging
 ```
 
 ## Technical Stack
@@ -184,37 +184,37 @@ Although the source uses ESM (`"type": "module"`), the bundled output is CommonJ
 
 ```bash
 # Check CLI options
-node dist/index.cjs --help
+node dist/jsmuggle.cjs --help
 
 # Check auth subcommand
-node dist/index.cjs auth --help
+node dist/jsmuggle.cjs auth --help
 
 # Check download subcommand
-node dist/index.cjs download --help
+node dist/jsmuggle.cjs download --help
 
 # Check search subcommand
-node dist/index.cjs search --help
+node dist/jsmuggle.cjs search --help
 
 # Check session status
-node dist/index.cjs auth
+node dist/jsmuggle.cjs auth
 
 # Login
-node dist/index.cjs auth login -u MyUser
+node dist/jsmuggle.cjs auth login -u MyUser
 
 # Download two caches
-node dist/index.cjs download GC123 GC456 -o ./gpx
+node dist/jsmuggle.cjs download GC123 GC456 -o ./gpx
 
 # Search and auto-download
-node dist/index.cjs search -g GC123 --download
+node dist/jsmuggle.cjs search -g GC123 --download
 
 # Verbose mode
-node dist/index.cjs --verbose download GC13Y2Y
+node dist/jsmuggle.cjs --verbose download GC13Y2Y
 
 # Trace mode
-node dist/index.cjs --trace download GC13Y2Y
+node dist/jsmuggle.cjs --trace download GC13Y2Y
 
 # Both modes
-node dist/index.cjs --verbose --trace download GC13Y2Y
+node dist/jsmuggle.cjs --verbose --trace download GC13Y2Y
 ```
 
 ## Features
@@ -235,7 +235,7 @@ node dist/index.cjs --verbose --trace download GC13Y2Y
 ## Build Commands
 
 ```bash
-npm run build      # Bundle with esbuild into dist/index.cjs
+npm run build      # Bundle with esbuild into dist/jsmuggle.cjs
 npm run typecheck  # Type check with tsc --noEmit
 npm run dev        # Run with tsx (development)
 npm start          # Run compiled version
@@ -245,7 +245,7 @@ npm start          # Run compiled version
 
 - **Bundler**: esbuild 0.27.3
 - **Entry**: `src/index.ts`
-- **Output**: `dist/index.cjs` (496KB minified + sourcemap)
+- **Output**: `dist/jsmuggle.cjs` (496KB minified + sourcemap)
 - **Target**: Node.js 20
 - **Format**: CommonJS (required for bundling with Node.js native modules)
 - **External**: `jsdom` (must remain external due to runtime file dependencies like `default-stylesheet.css` and `xhr-sync-worker.js`)
@@ -255,7 +255,7 @@ npm start          # Run compiled version
 
 The build produces:
 
-- `dist/index.cjs` - Main executable (496KB, minified)
-- `dist/index.cjs.map` - Source map for debugging (1.7MB)
+- `dist/jsmuggle.cjs` - Main executable (496KB, minified)
+- `dist/jsmuggle.cjs.map` - Source map for debugging (1.7MB)
 
 All npm dependencies (except jsdom) are bundled into the single file, making distribution easy.

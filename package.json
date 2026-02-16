@@ -4,17 +4,17 @@
 	"version": "1.0.0",
 	"license": "GPL-3.0-or-later",
 	"description": "Generate GPX files from geocaching.com from the command line",
-	"main": "dist/index.cjs",
+	"main": "dist/jsmuggle.cjs",
 	"type": "module",
 	"bin": {
-		"jsmuggle": "dist/index.cjs"
+		"jsmuggle": "dist/jsmuggle.cjs"
 	},
 	"scripts": {
 		"build": "node scripts/build.js",
 		"build:sea": "node --build-sea sea-config.json",
 		"typecheck": "tsc --noEmit",
 		"dev": "tsx src/index.ts",
-		"start": "node dist/index.cjs",
+		"start": "node dist/jsmuggle.cjs",
 		"test": "vitest",
 		"test:ui": "vitest --ui",
 		"test:coverage": "vitest run --coverage",
