@@ -9,10 +9,21 @@ Generate GPX files from geocaching.com from the command line.
 
 ## Installation
 
+### Build and run from code
+
 ```bash
 npm install
 npm run build
+node dist/jsmuggle.cjs
 ```
+
+### Single executable application
+
+The application is offered as [single executable application](https://nodejs.org/api/single-executable-applications.html) for Linux, macOS and Windows on x86-64.
+
+Download the executable for your application from the [latest release](https://github.com/dimi-be/jsmuggle/releases). Make the file executable and run it from your commandline.
+
+**macOS**: the macOS version is not tested and might not work.
 
 ## Usage
 
