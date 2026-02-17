@@ -61,6 +61,7 @@ jobs:
                   npm run build
 
             - name: Create SEA Binary
+              shell: bash
               run: |
                   npm run build:sea
                   chmod +x ./scripts/build-sea.sh
