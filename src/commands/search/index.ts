@@ -3,7 +3,8 @@ import { GlobalOptions, withContext } from '../../context.js';
 import { handleSearch, SearchOptions } from './actions.js';
 
 // Re-export for backwards compatibility
-export { handleSearch, SearchOptions } from './actions.js';
+export { handleSearch } from './actions.js';
+export type { SearchOptions } from './actions.js';
 
 interface SearchCommandOptions {
 	premium: boolean;

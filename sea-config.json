@@ -1,5 +1,7 @@
 {
 	"main": "dist/jsmuggle.cjs",
 	"output": "dist/sea-prep.blob",
-	"disableSentinelFuse": false
+	"disableSentinelFuse": false,
+	"disableExperimentalSEAWarning": true,
+	"execArgv": ["--no-warnings", "--disable-warning=ExperimentalWarning"]
 }
