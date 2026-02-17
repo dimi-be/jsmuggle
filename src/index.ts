@@ -30,7 +30,7 @@ const program = new Command();
 program
 	.name('jsmuggle')
 	.description('Generate GPX files from geocaching.com from the command line')
-	.version('1.0.0')
+	.version('1.1.0')
 	.configureOutput({ writeErr: (str) => process.stdout.write(str) })
 	.option('--verbose', 'Show extra details about HTTP requests being made')
 	.option(

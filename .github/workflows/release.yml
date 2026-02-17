@@ -41,11 +41,11 @@ jobs:
             matrix:
                 include:
                     - os: ubuntu-latest
-                      artifact_name: my-tool-linux
+                      artifact_name: jsmuggle-linux
                     - os: windows-latest
-                      artifact_name: my-tool-win.exe
+                      artifact_name: jsmuggle-win.exe
                     - os: macos-latest
-                      artifact_name: my-tool-macos
+                      artifact_name: jsmuggle-macos
 
         steps:
             - uses: actions/checkout@v4
@@ -63,17 +63,20 @@ jobs:
             - name: Create SEA Binary
               run: |
                   npm run build:sea
+                  chmod +x ./scripts/build-sea.sh
+                  ./scripts/build-sea.sh
 
-                  cp $(command -v node) "./dist/"
-                  # 2. Rename the generic output to your platform name
-                  # (Node output name depends on your sea-config.json 'output')
-                  mv sea ${{ matrix.artifact_name }} 2>/dev/null || mv sea.exe ${{ matrix.artifact_name }}
+                  # Rename the output for the release uploader
+                  if [ "${{ matrix.os }}" = "windows-latest" ]; then
+                      mv dist/jsmuggle.exe dist/${{ matrix.artifact_name }}
+                  else
+                      mv dist/jsmuggle dist/${{ matrix.artifact_name }}
+                  fi
 
             - name: Create GitHub Release
               uses: softprops/action-gh-release@v2.4.2
               if: startsWith(github.ref, 'refs/tags/')
               with:
-                  files: dist/jsmuggle.cjs
-                  generate_release_notes: false
+                  files: dist/bin/${{ matrix.artifact_name }}
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
