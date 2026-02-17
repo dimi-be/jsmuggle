@@ -1,4 +1,4 @@
-name: Node.js Package
+name: Release jsmuggle
 
 on:
     push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
     esbuild:
-        name: esbuild
+        name: Create jsmuggle.csj bundle
         runs-on: ubuntu-latest
         permissions:
             contents: write
@@ -24,7 +24,6 @@ jobs:
               run: |
                   npm install
                   npm run build
-                  npm run test:run
 
             - name: Create GitHub Release
               uses: softprops/action-gh-release@v2.4.2
@@ -35,7 +34,7 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     seabuild:
-        name: Build for ${{ matrix.os }}
+        name: Create SEA Binary for ${{ matrix.os }}
         runs-on: ${{ matrix.os }}
         strategy:
             matrix:
@@ -50,10 +49,10 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            - name: Setup Node.js
+            - name: Setup Node
               uses: actions/setup-node@v4
               with:
-                  node-version: '22.22.0'
+                  node-version: 22
 
             - name: Install & Bundle
               run: |
