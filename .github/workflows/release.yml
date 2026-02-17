@@ -28,7 +28,7 @@ jobs:
             - name: Save bundle
               uses: actions/upload-artifact@v4
               with:
-                  name: jsmuggle.cjs
+                  name: jsmuggle-bundle
                   path: dist/jsmuggle.cjs
 
     seabuild:
@@ -46,12 +46,6 @@ jobs:
                       artifact_name: jsmuggle-macos
 
         steps:
-            - name: Download jsmuggle.cjs
-              uses: actions/download-artifact@v4
-              with:
-                  name: jsmuggle.cjs
-                  path: dist
-
             - uses: actions/checkout@v4
 
             - name: Setup Node
@@ -59,10 +53,16 @@ jobs:
               with:
                   node-version: 22
 
+            - name: Download jsmuggle.cjs
+              uses: actions/download-artifact@v4
+              with:
+                  name: jsmuggle-bundle
+                  path: dist
+
             - name: Create SEA Binary
               shell: bash
               run: |
-                  npm run build:sea
+                  node --experimental-sea-config ./sea-config.json
                   chmod +x ./scripts/build-sea.sh
                   ./scripts/build-sea.sh
 
