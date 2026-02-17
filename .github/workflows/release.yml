@@ -58,12 +58,13 @@ jobs:
             - name: Install & Bundle
               run: |
                   npm install
-                  npm run bundle
+                  npm run build
 
             - name: Create SEA Binary
               run: |
-                  # 1. Run the build-sea command
                   npm run build:sea
+
+                  cp $(command -v node) "./dist/"
                   # 2. Rename the generic output to your platform name
                   # (Node output name depends on your sea-config.json 'output')
                   mv sea ${{ matrix.artifact_name }} 2>/dev/null || mv sea.exe ${{ matrix.artifact_name }}

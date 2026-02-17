@@ -11,7 +11,7 @@
 	},
 	"scripts": {
 		"build": "node scripts/build.js",
-		"build:sea": "node --build-sea sea-config.json",
+		"build:sea": "node --experimental-sea-config ./sea-config.json",
 		"typecheck": "tsc --noEmit",
 		"dev": "tsx src/index.ts",
 		"start": "node dist/jsmuggle.cjs",
