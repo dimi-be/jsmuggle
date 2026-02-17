@@ -7,7 +7,8 @@ on:
     workflow_dispatch:
 
 jobs:
-    build:
+    esbuild:
+        name: esbuild
         runs-on: ubuntu-latest
         permissions:
             contents: write
@@ -17,7 +18,7 @@ jobs:
             - name: Setup Node
               uses: actions/setup-node@v4
               with:
-                  node-version: 22 # Using Node 22 (LTS) for better stability
+                  node-version: 22
 
             - name: Install & Build
               run: |
@@ -26,11 +27,52 @@ jobs:
                   npm run test:run
 
             - name: Create GitHub Release
-              # Pinning to v2.4.2 avoids the 2026 retry loop bug
               uses: softprops/action-gh-release@v2.4.2
               if: startsWith(github.ref, 'refs/tags/')
               with:
                   files: dist/jsmuggle.cjs
-                  generate_release_notes: true # Bonus: Auto-generates changelog
+                  generate_release_notes: false
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    seabuild:
+        name: Build for ${{ matrix.os }}
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                include:
+                    - os: ubuntu-latest
+                      artifact_name: my-tool-linux
+                    - os: windows-latest
+                      artifact_name: my-tool-win.exe
+                    - os: macos-latest
+                      artifact_name: my-tool-macos
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '22.22.0'
+
+            - name: Install & Bundle
+              run: |
+                  npm install
+                  npm run bundle
+
+            - name: Create SEA Binary
+              run: |
+                  # 1. Run the build-sea command
+                  npm run build:sea
+                  # 2. Rename the generic output to your platform name
+                  # (Node output name depends on your sea-config.json 'output')
+                  mv sea ${{ matrix.artifact_name }} 2>/dev/null || mv sea.exe ${{ matrix.artifact_name }}
+
+            - name: Create GitHub Release
+              uses: softprops/action-gh-release@v2.4.2
+              if: startsWith(github.ref, 'refs/tags/')
+              with:
+                  files: dist/jsmuggle.cjs
+                  generate_release_notes: false
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
