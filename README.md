@@ -4,12 +4,12 @@ Generate GPX files from geocaching.com from the command line.
 
 ## Requirements
 
-- Node.js v20.x or higher
+- Node.js v22.x or higher
 - A geocaching.com account
 
 ## Installation
 
-### Build and run from code
+### Build and run from source
 
 ```bash
 npm install
@@ -19,11 +19,45 @@ node dist/jsmuggle.cjs
 
 ### Single executable application
 
-The application is offered as [single executable application](https://nodejs.org/api/single-executable-applications.html) for Linux, macOS and Windows on x86-64.
+The easiest way to use `jsmuggle` is to download the pre-built executable for your operating system. These are offered for Linux, macOS, and Windows (x64).
 
-Download the executable for your application from the [latest release](https://github.com/dimi-be/jsmuggle/releases). Make the file executable and run it from your commandline.
+1.  **Download:** Go to the [latest release](https://github.com/dimi-be/jsmuggle/releases) page and download the appropriate file for your system (e.g., `jsmuggle-linux`, `jsmuggle-macos`, or `jsmuggle-win.exe`).
 
-**macOS**: the macOS version is not tested and might not work.
+2.  **Prepare the executable:**
+    - **Windows:** No extra steps are needed. You can run `jsmuggle-win.exe` directly from PowerShell or Command Prompt.
+    - **Linux / macOS:** You need to make the file executable first.
+        ```bash
+        chmod +x ./jsmuggle-linux  # Or ./jsmuggle-macos
+        ```
+
+**macOS Note**: The macOS version is not signed. You may need to grant it permission to run in `System Settings > Privacy & Security`.
+
+### Using the Bundled Script (Node.js required)
+
+If you have Node.js (v22.x or higher) installed, you can download just the bundled script instead of the full executable.
+
+1.  **Download:** Go to the [latest release](https://github.com/dimi-be/jsmuggle/releases) page and download the `jsmuggle.cjs` file.
+
+2.  **Run:**
+    Open your terminal and run the script using Node.js:
+
+    ```bash
+    node /path/to/your/downloaded/jsmuggle.cjs [command] [options]
+    ```
+
+    On Linux or macOS:
+
+    First, make the downloaded file executable:
+
+    ```bash
+    chmod +x /path/to/your/downloaded/jsmuggle.cjs
+    ```
+
+    Then, you can run it directly:
+
+    ```bash
+    /path/to/your/downloaded/jsmuggle.cjs [command] [options]
+    ```
 
 ## Usage
 
