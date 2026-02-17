@@ -32,6 +32,7 @@ jobs:
                   path: dist/jsmuggle.cjs
 
     seabuild:
+        needs: esbuild
         name: Create SEA Binary for ${{ matrix.os }}
         runs-on: ${{ matrix.os }}
         strategy:
@@ -45,17 +46,18 @@ jobs:
                       artifact_name: jsmuggle-macos
 
         steps:
+            - name: Download jsmuggle.cjs
+              uses: actions/download-artifact@v4
+              with:
+                  name: jsmuggle.cjs
+                  path: dist
+
             - uses: actions/checkout@v4
 
             - name: Setup Node
               uses: actions/setup-node@v4
               with:
                   node-version: 22
-
-            - name: Install & Bundle
-              run: |
-                  npm install
-                  npm run build
 
             - name: Create SEA Binary
               shell: bash
