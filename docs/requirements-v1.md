@@ -90,7 +90,7 @@ Follow the following technical requirements:
 - **Interactive Prompts:** Clack
 - **HTTP Client:** axios with axios-cookiejar-support
 - **Cookie Management:** tough-cookie
-- **HTML Parsing:** JSDOM
+- **HTML Parsing:** LinkeDOM
 - **prettier**
 - **vitest**
 - **geo-coordinates-parser**

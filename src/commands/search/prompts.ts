@@ -1,7 +1,7 @@
 import { text, multiselect } from '@clack/prompts';
 import type { SearchResult } from '../../types/index.js';
 
-export async function promptForSearchTerm(): Promise<string> {
+export async function promptForSearchTerm(): Promise<string | symbol> {
 	const result = await text({
 		message: 'Enter search term (GC code, coordinates, or keyword):',
 		placeholder: 'e.g., GC13Y2Y or "40.446, -79.949" or Seattle',
@@ -12,7 +12,7 @@ export async function promptForSearchTerm(): Promise<string> {
 		},
 	});
 
-	return result as string;
+	return result;
 }
 
 export async function promptCacheSelection(

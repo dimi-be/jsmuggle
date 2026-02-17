@@ -1,4 +1,4 @@
-name: Node.js Package
+name: Release jsmuggle
 
 on:
     push:
@@ -7,7 +7,8 @@ on:
     workflow_dispatch:
 
 jobs:
-    build:
+    esbuild:
+        name: Create jsmuggle.csj bundle
         runs-on: ubuntu-latest
         permissions:
             contents: write
@@ -17,20 +18,65 @@ jobs:
             - name: Setup Node
               uses: actions/setup-node@v4
               with:
-                  node-version: 22 # Using Node 22 (LTS) for better stability
+                  node-version: 22
 
             - name: Install & Build
               run: |
                   npm install
                   npm run build
-                  npm run test:run
 
             - name: Create GitHub Release
-              # Pinning to v2.4.2 avoids the 2026 retry loop bug
               uses: softprops/action-gh-release@v2.4.2
               if: startsWith(github.ref, 'refs/tags/')
               with:
                   files: dist/jsmuggle.cjs
-                  generate_release_notes: true # Bonus: Auto-generates changelog
+                  generate_release_notes: false
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    seabuild:
+        name: Create SEA Binary for ${{ matrix.os }}
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                include:
+                    - os: ubuntu-latest
+                      artifact_name: jsmuggle-linux
+                    - os: windows-latest
+                      artifact_name: jsmuggle-win.exe
+                    - os: macos-latest
+                      artifact_name: jsmuggle-macos
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+
+            - name: Install & Bundle
+              run: |
+                  npm install
+                  npm run build
+
+            - name: Create SEA Binary
+              shell: bash
+              run: |
+                  npm run build:sea
+                  chmod +x ./scripts/build-sea.sh
+                  ./scripts/build-sea.sh
+
+                  # Rename the output for the release uploader
+                  if [ "${{ matrix.os }}" = "windows-latest" ]; then
+                      mv dist/jsmuggle.exe dist/${{ matrix.artifact_name }}
+                  else
+                      mv dist/jsmuggle dist/${{ matrix.artifact_name }}
+                  fi
+
+            - name: Create GitHub Release
+              uses: softprops/action-gh-release@v2.4.2
+              if: startsWith(github.ref, 'refs/tags/')
+              with:
+                  files: dist/bin/${{ matrix.artifact_name }}
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

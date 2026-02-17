@@ -27,7 +27,6 @@ try {
 			'.ts': 'ts',
 		},
 		tsconfig: './tsconfig.json',
-		external: ['jsdom'],
 	});
 
 	// Add shebang to the output file

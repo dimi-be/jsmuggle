@@ -54,7 +54,7 @@ A `__RequestVerificationToken` (CSRF token) is required to submit the login form
 - **Method:** `GET`
 - **Logic:**
     1.  Request the sign-in page to get initial session cookies.
-    2.  Parse the HTML response using JSDOM.
+    2.  Parse the HTML response using LinkeDOM.
     3.  Find the login form (`<form id="SignupSignin">`).
     4.  Extract the `value` from the hidden input `input[name="__RequestVerificationToken"]`.
     5.  Extract the `value` from the hidden input `input[name="ReturnUrl"]`.
@@ -130,7 +130,7 @@ Downloading a GPX file requires a valid session and form data scraped from the g
 - **Method:** `GET`
 - **Logic:**
     1.  Request the geocache page.
-    2.  Parse the HTML with JSDOM and find the main form (`<form id="aspnetForm">`).
+    2.  Parse the HTML with LinkeDOM and find the main form (`<form id="aspnetForm">`).
     3.  Extract all name-value pairs from the hidden inputs (`<input type="hidden">`).
     4.  Modify the form data: set the value of `__EVENTTARGET` to `ctl00$ContentBody$lnkGpxDownload`.
     5.  Ensure the `__RequestVerificationToken` is included in the cookies for the next request.

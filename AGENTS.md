@@ -73,7 +73,7 @@ dist/
 - **Prompts:** Clack 0.10.0
 - **HTTP:** axios 1.7.9 + axios-cookiejar-support 5.0.5
 - **Cookies:** tough-cookie 5.1.0
-- **HTML Parsing:** JSDOM 28.0.0
+- **HTML Parsing:** LinkeDOM 0.18.9
 - **Coordinate Parsing:** geo-coordinates-parser 1.7.4
 - **Development:** tsx 4.19.2
 - **Testing:** vitest 4.0.18
@@ -164,13 +164,12 @@ Running `jsmuggle` without any command defaults to auth status check.
 
 The build script (`scripts/build.js`) configures esbuild with:
 
-- **Bundle**: All dependencies inlined (except jsdom)
+- **Bundle**: All dependencies inlined
 - **Platform**: `node` - Node.js environment
 - **Target**: `node20` - Node.js 20 compatibility
 - **Format**: `cjs` - CommonJS output (works with Node.js CLI execution)
 - **Minify**: Enabled for production builds
 - **Sourcemap**: Enabled for debugging
-- **External**: `jsdom` (has runtime file dependencies)
 
 ### Why CommonJS?
 
@@ -248,7 +247,7 @@ npm start          # Run compiled version
 - **Output**: `dist/jsmuggle.cjs` (496KB minified + sourcemap)
 - **Target**: Node.js 20
 - **Format**: CommonJS (required for bundling with Node.js native modules)
-- **External**: `jsdom` (must remain external due to runtime file dependencies like `default-stylesheet.css` and `xhr-sync-worker.js`)
+
 - **Shebang**: Automatically prepended to output for CLI execution
 
 ### Bundle Output
@@ -258,4 +257,4 @@ The build produces:
 - `dist/jsmuggle.cjs` - Main executable (496KB, minified)
 - `dist/jsmuggle.cjs.map` - Source map for debugging (1.7MB)
 
-All npm dependencies (except jsdom) are bundled into the single file, making distribution easy.
+All npm dependencies are bundled into the single file, making distribution easy.

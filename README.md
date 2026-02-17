@@ -297,7 +297,6 @@ The project uses **esbuild** to bundle all dependencies into a single executable
 - **Input**: `src/index.ts`
 - **Output**: `dist/jsmuggle.cjs` (496KB minified)
 - **Format**: CommonJS (for Node.js compatibility)
-- **External**: `jsdom` (has runtime file dependencies that cannot be bundled)
 
 Benefits of bundling:
 
@@ -355,7 +354,7 @@ src/
 - **Interactive Prompts:** Clack 0.10.0
 - **HTTP Client:** axios 1.7.9 with axios-cookiejar-support 5.0.5
 - **Cookie Management:** tough-cookie 5.1.0
-- **HTML Parsing:** JSDOM 28.0.0
+- **HTML Parsing:** LinkeDOM 0.18.9
 - **Coordinate Parsing:** geo-coordinates-parser 1.7.4
 - **Development:** tsx 4.19.2
 - **Testing:** vitest 4.0.18

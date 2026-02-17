@@ -1,5 +1,4 @@
 import type { AxiosInstance } from 'axios';
-import { JSDOM } from 'jsdom';
 
 const PROFILE_URL = 'https://www.geocaching.com/account/settings/profile';
 const SIGNIN_URL = 'https://www.geocaching.com/account/signin';

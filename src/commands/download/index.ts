@@ -3,7 +3,8 @@ import { GlobalOptions, withContext } from '../../context.js';
 import { handleDownload, DownloadOptions } from './actions.js';
 
 // Re-export for backwards compatibility
-export { handleDownload, DownloadOptions } from './actions.js';
+export { handleDownload } from './actions.js';
+export type { DownloadOptions } from './actions.js';
 
 interface DownloadCommandOptions {
 	output: string;
