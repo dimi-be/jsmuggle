@@ -24,7 +24,12 @@ export async function handleSearch(
 	// Prompt for search term if not provided
 	let searchTerm = options.searchTerm;
 	if (!searchTerm) {
-		searchTerm = await promptForSearchTerm();
+		const promptResult = await promptForSearchTerm();
+		if (typeof promptResult === 'symbol') {
+			// User cancelled the prompt (e.g., pressed Escape)
+			return;
+		}
+		searchTerm = promptResult;
 	}
 
 	const isAuthenticated = await ensureAuthenticated(client, {

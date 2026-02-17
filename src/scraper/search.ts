@@ -211,13 +211,21 @@ interface SearchNearbyResult {
 
 export async function searchNearby(
 	client: AxiosInstance,
-	searchTerm: string,
+	searchTerm: string | symbol,
 	radius: number | undefined,
 	limit: number,
 	interactive: boolean,
 	includePremium: boolean,
 	delay: number = 1000,
 ): Promise<SearchNearbyResult> {
+	// Handle cancellation (symbol indicates user cancelled the prompt)
+	if (typeof searchTerm === 'symbol') {
+		return {
+			results: [],
+			displayTerm: '',
+		};
+	}
+
 	// Detect search type
 	const {
 		type: searchType,
