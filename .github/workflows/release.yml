@@ -25,14 +25,12 @@ jobs:
                   npm install
                   npm run build
 
-            - name: Create GitHub Release
-              uses: softprops/action-gh-release@v2.4.2
-              if: startsWith(github.ref, 'refs/tags/')
+            - name: Save bundle
+              uses: actions/upload-artifact@v4
               with:
-                  files: dist/jsmuggle.cjs
-                  generate_release_notes: false
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  name: jsmuggle.cjs
+                  path: dist/jsmuggle.cjs
+                  
     seabuild:
         name: Create SEA Binary for ${{ matrix.os }}
         runs-on: ${{ matrix.os }}
@@ -72,12 +70,30 @@ jobs:
                   else
                       mv dist/jsmuggle dist/${{ matrix.artifact_name }}
                   fi
-
-            - name: Create GitHub Release
-              uses: softprops/action-gh-release@v2.4.2
-              if: startsWith(github.ref, 'refs/tags/')
+                  
+            - name: Save binary
+              uses: actions/upload-artifact@v4
               with:
-                  files: dist/${{ matrix.artifact_name }}
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  name: ${{ matrix.artifact_name }}
+                  path: dist/${{ matrix.artifact_name }}
+                  
+    release:
+        needs: [seabuild, esbuild]
+        runs-on: ubuntu-latest
+        permissions:
+          contents: write
+        steps:
+          - name: Download all artifacts
+            uses: actions/download-artifact@v4
+            with:
+              path: all-binaries
+              merge-multiple: true # Flattens the folder structure
+    
+          - name: Create Single Release
+            uses: softprops/action-gh-release@v2.4.2
+            with:
+              files: all-binaries/*
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
