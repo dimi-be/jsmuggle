@@ -1,5 +1,5 @@
 import type { AxiosInstance } from 'axios';
-import { JSDOM } from 'jsdom';
+import { parseHTML } from 'linkedom';
 import { CookieJar } from 'tough-cookie';
 import type {
 	GeocacheFormData,
@@ -27,8 +27,7 @@ export async function extractGeocacheFormData(
 			return { exists: false };
 		}
 
-		const dom = new JSDOM(response.data);
-		const document = dom.window.document;
+		const { document } = parseHTML(response.data);
 
 		const form = document.getElementById('aspnetForm');
 		if (!form) {
@@ -90,8 +89,7 @@ export async function extractGeocacheInfo(
 			};
 		}
 
-		const dom = new JSDOM(response.data);
-		const document = dom.window.document;
+		const { document } = parseHTML(response.data);
 
 		// Extract cache name
 		const cacheNameElement = document.getElementById(

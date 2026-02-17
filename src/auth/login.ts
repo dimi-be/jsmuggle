@@ -1,5 +1,5 @@
 import type { AxiosInstance } from 'axios';
-import { JSDOM } from 'jsdom';
+import { parseHTML } from 'linkedom';
 import type { LoginFormData } from '../types/index.js';
 
 const SIGNIN_URL = 'https://www.geocaching.com/account/signin';
@@ -9,8 +9,7 @@ export async function extractLoginFormData(
 ): Promise<LoginFormData> {
 	try {
 		const response = await client.get(SIGNIN_URL);
-		const dom = new JSDOM(response.data);
-		const document = dom.window.document;
+		const { document } = parseHTML(response.data);
 
 		const form = document.getElementById('SignupSignin');
 		if (!form) {

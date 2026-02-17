@@ -1,5 +1,5 @@
 import type { AxiosInstance } from 'axios';
-import { JSDOM } from 'jsdom';
+import { parseHTML } from 'linkedom';
 import * as p from '@clack/prompts';
 // @ts-ignore - geo-coordinates-parser doesn't have types
 import { convert } from 'geo-coordinates-parser';
@@ -34,8 +34,8 @@ export async function extractBuildId(client: AxiosInstance): Promise<string> {
 		);
 	}
 
-	const dom = new JSDOM(response.data);
-	const scriptTag = dom.window.document.getElementById('__NEXT_DATA__');
+	const { document } = parseHTML(response.data);
+	const scriptTag = document.getElementById('__NEXT_DATA__');
 
 	if (!scriptTag || !scriptTag.textContent) {
 		throw new Error('Could not find __NEXT_DATA__ script tag');
