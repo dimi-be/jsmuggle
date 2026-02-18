@@ -9,55 +9,30 @@ Generate GPX files from geocaching.com from the command line.
 
 ## Installation
 
-### Build and run from source
+### Run from source
 
 ```bash
 npm install
-npm run build
-node dist/jsmuggle.cjs
+npm run dev
 ```
 
-### Single executable application
+### Portable application
 
-The easiest way to use `jsmuggle` is to download the pre-built executable for your operating system. These are offered for Linux, macOS, and Windows (x64).
+The easiest way to use `jsmuggle` (if you don't have node.js installed) is to download the pre-built SEA (Single Executable Application) executable for your operating system. These are offered for Linux, macOS, and Windows (x64).
 
-1.  **Download:** Go to the [latest release](https://github.com/dimi-be/jsmuggle/releases) page and download the appropriate file for your system (e.g., `jsmuggle-linux`, `jsmuggle-macos`, or `jsmuggle-win.exe`).
+**macOS Note**: The macOS version is not signed (and not tested). You may need to grant it permission to run in `System Settings > Privacy & Security`.
 
-2.  **Prepare the executable:**
-    - **Windows:** No extra steps are needed. You can run `jsmuggle-win.exe` directly from PowerShell or Command Prompt.
-    - **Linux / macOS:** You need to make the file executable first.
-        ```bash
-        chmod +x ./jsmuggle-linux  # Or ./jsmuggle-macos
-        ```
+### Install using NPM
 
-**macOS Note**: The macOS version is not signed. You may need to grant it permission to run in `System Settings > Privacy & Security`.
+The best way is to install it globally with NPM. If you have Node.js (v22.x or higher) installed with npm.
+
+```bash
+npm install -g jsmuggle
+```
 
 ### Using the Bundled Script (Node.js required)
 
 If you have Node.js (v22.x or higher) installed, you can download just the bundled script instead of the full executable.
-
-1.  **Download:** Go to the [latest release](https://github.com/dimi-be/jsmuggle/releases) page and download the `jsmuggle.cjs` file.
-
-2.  **Run:**
-    Open your terminal and run the script using Node.js:
-
-    ```bash
-    node /path/to/your/downloaded/jsmuggle.cjs [command] [options]
-    ```
-
-    On Linux or macOS:
-
-    First, make the downloaded file executable:
-
-    ```bash
-    chmod +x /path/to/your/downloaded/jsmuggle.cjs
-    ```
-
-    Then, you can run it directly:
-
-    ```bash
-    /path/to/your/downloaded/jsmuggle.cjs [command] [options]
-    ```
 
 ## Usage
 
@@ -392,7 +367,7 @@ src/
 
 ## Technical Stack
 
-- **Runtime:** Node.js v20.x+
+- **Runtime:** Node.js v22.x+
 - **Language:** TypeScript 5.7.3
 - **Bundler:** esbuild 0.27.3 (bundles all dependencies into single executable)
 - **CLI Framework:** Commander.js 13.1.0
