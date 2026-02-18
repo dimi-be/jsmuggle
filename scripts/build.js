@@ -5,7 +5,7 @@ import { readFileSync, writeFileSync, chmodSync } from 'fs';
 
 // Read package.json to get the current version
 const packageJson = JSON.parse(readFileSync('./package.json', 'utf8'));
-const version = packageJson.version || '1.0.0';
+const version = packageJson.version;
 
 console.log(`Building jsmuggle v${version}...`);
 

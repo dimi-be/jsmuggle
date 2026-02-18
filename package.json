@@ -1,17 +1,34 @@
 {
 	"name": "jsmuggle",
 	"author": "Dimitri Michaux",
-	"version": "1.0.0",
+	"version": "1.1.1",
 	"license": "GPL-3.0-or-later",
 	"description": "Generate GPX files from geocaching.com from the command line",
 	"main": "dist/jsmuggle.cjs",
 	"type": "module",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/dimi-be/jsmuggle.git"
+	},
 	"bin": {
 		"jsmuggle": "dist/jsmuggle.cjs"
+	},
+	"files": [
+		"dist/jsmuggle.cjs",
+		"README.md",
+		"LICENSE",
+		"USAGE.md",
+		"CONTRIBUTING.md"
+	],
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
 	},
 	"scripts": {
 		"build": "node scripts/build.js",
 		"build:sea": "node --experimental-sea-config ./sea-config.json",
+		"prepublishOnly": "npm run build && npm run test:run",
+		"pub-check": "npm publish --dry-run",
 		"typecheck": "tsc --noEmit",
 		"dev": "tsx src/index.ts",
 		"start": "node dist/jsmuggle.cjs",

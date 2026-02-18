@@ -25,12 +25,13 @@ import { registerSearchCommand } from './commands/search/index.js';
 import { GlobalOptions, withContext } from './context.js';
 import { handleAuthStatus } from './commands/auth/actions.js';
 
+const version = process.env.npm_package_version || 'development';
 const program = new Command();
 
 program
 	.name('jsmuggle')
 	.description('Generate GPX files from geocaching.com from the command line')
-	.version('1.1.0')
+	.version(version)
 	.configureOutput({ writeErr: (str) => process.stdout.write(str) })
 	.option('--verbose', 'Show extra details about HTTP requests being made')
 	.option(
