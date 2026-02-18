@@ -1,7 +1,7 @@
 {
 	"name": "jsmuggle",
 	"author": "Dimitri Michaux",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"license": "GPL-3.0-or-later",
 	"description": "Generate GPX files from geocaching.com from the command line",
 	"main": "dist/jsmuggle.cjs",
@@ -13,7 +13,9 @@
 		"dist/jsmuggle.cjs",
 		"dist/jsmuggle.cjs.map",
 		"README.md",
-		"LICENSE"
+		"LICENSE",
+		"USAGE.md",
+		"CONTRIBUTING.md"
 	],
 	"scripts": {
 		"build": "node scripts/build.js",

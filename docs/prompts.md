@@ -1,6 +1,6 @@
 # General prompt
 
-You are working on an a nodejs application called jsmuggle. It generates GPX files for geocaching by scraping geocaching.com. You can find information about this application in README.md and AGENTS.md. When making changes you should keep the README.md and AGENTS.md up to date.
+You are working on an a nodejs application called jsmuggle. It generates GPX files for geocaching by scraping geocaching.com. You can find information about this application in README.md and AGENTS.md. When making changes you should keep the README.md, USAGE.md, CONTRIBUTING.md and AGENTS.md up to date.
 
 # Update requirements
 
