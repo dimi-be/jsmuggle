@@ -114,12 +114,11 @@ jobs:
                   node-version: 22
                   registry-url: 'https://registry.npmjs.org'
 
-            - name: Install & Build
+            - name: Install
               run: |
                   npm install
-                  npm run build
 
-            - name: Publish to NPM
+            - name: Build and Publish to NPM
               run: npm publish --provenance --access public
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

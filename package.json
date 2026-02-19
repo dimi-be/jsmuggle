@@ -26,6 +26,7 @@
 	},
 	"scripts": {
 		"build": "node scripts/build.js",
+		"build:no-minify": "node scripts/build.js --no-minify",
 		"build:sea": "node --experimental-sea-config ./sea-config.json",
 		"prepublishOnly": "npm run build && npm run test:run",
 		"pub-check": "npm publish --dry-run",
@@ -64,6 +65,6 @@
 		"vitest": "^4.0.18"
 	},
 	"engines": {
-		"node": ">=20.0.0"
+		"node": ">=22.0.0"
 	}
 }

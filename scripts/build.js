@@ -3,7 +3,7 @@
 import { build } from 'esbuild';
 import { readFileSync, writeFileSync, chmodSync } from 'fs';
 
-// Read package.json to get the current version
+const minify = !process.argv.includes('--no-minify');
 const packageJson = JSON.parse(readFileSync('./package.json', 'utf8'));
 const version = packageJson.version;
 
@@ -17,7 +17,7 @@ try {
 		platform: 'node',
 		target: 'node20',
 		format: 'cjs',
-		minify: true,
+		minify: minify,
 		sourcemap: true,
 
 		define: {
